@@ -3,7 +3,7 @@ package repositories
 import (
 	"github.com/che-ict/DEV-DT-Microblog/models"
 	"github.com/glebarez/sqlite"
-	"github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
 	"os"
