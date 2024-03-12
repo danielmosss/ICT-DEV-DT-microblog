@@ -24,8 +24,11 @@ jobs:
           go-version: '1.21.6'
           check-latest: true
 
-      - name: Run go test
-        run: go test -v ./...
+#      - name: Run go test
+#        run: go test -v ./...
 
       - name: Run go build
         run: go build -v ./...
+
+      - name: Run tests with gotestsum
+        run: gotestsum --junitfile test-report.xml -- -v ./...
