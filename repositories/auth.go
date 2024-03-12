@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"fmt"
 	"github.com/che-ict/DEV-DT-Microblog/models"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -18,7 +19,16 @@ func CreateUser(username, password, displayName string) error {
 		DisplayName: displayName,
 	}
 
+	// check if user already exists
+	// if user exists, return error
+
 	db := DB()
+
+	db.Where("username = ?", username).First(&user)
+	if user.ID != 0 {
+		// return error user already exists
+		return fmt.Errorf("user already exists")
+	}
 
 	if err := db.Create(&user).Error; err != nil {
 		return err
