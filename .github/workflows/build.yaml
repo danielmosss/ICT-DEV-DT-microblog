@@ -30,5 +30,8 @@ jobs:
       - name: Run go build
         run: go build -v ./...
 
+      - name: install gotestsum
+        run: go install gotest.tools/gotestsum@latest
+
       - name: Run tests with gotestsum
         run: gotestsum --junitfile test-report.xml -- -v ./...
