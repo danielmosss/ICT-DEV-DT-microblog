@@ -26,6 +26,3 @@ jobs:
 
       - name: Test
         uses: robherley/go-test-action@v0.1.0
-
-      - name: Stop MySQL container
-        run: docker stop $(docker ps -q -f name=mysql)
