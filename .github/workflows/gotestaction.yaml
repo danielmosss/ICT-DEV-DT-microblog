@@ -12,7 +12,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Setup golang 1.12.6
         uses: actions/setup-go@v5
@@ -23,5 +24,18 @@ jobs:
       - name: Build
         run: go build -v ./...
 
+      - name: Start MySQL container
+        run: |
+          docker run --rm -p 3306:3306 mysql:8.0
+
+      - name: Wacht tot MySQL is gestart
+        run: |
+          until mysqladmin -h 127.0.0.1 -P 3306 -u root ping &> /dev/null; do
+            sleep 1
+          done
+
       - name: Test
         uses: robherley/go-test-action@v0.1.0
+
+      - name: Stop MySQL container
+        run: docker stop $(docker ps -q -f name=mysql)
