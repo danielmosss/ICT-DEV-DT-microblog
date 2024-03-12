@@ -6,7 +6,7 @@ import (
 )
 
 func CreateUser(username, password, displayName string) error {
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), 11)
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), 11) // foutieve functie
 
 	if err != nil {
 		return err
